@@ -16,18 +16,43 @@ public class Equations {
 
     public void setT(double t) {
         this.t = t;
+        isT = true;
     }
     public void setD(double d) {
         this.d = d;
+        isD = true;
     }
     public void setVi(double vi) {
         this.vi = vi;
+        isVi = true;
     }
     public void setVf(double vf) {
         this.vf = vf;
+        isVf = true;
     }
     public void setA(double a) {
         this.a = a;
+        isA = true;
+    }
+
+    public double getT(){
+        return t;
+    }
+
+    public double getD(){
+        return d;
+    }
+
+    public double getA() {
+        return a;
+    }
+
+    public double getVf() {
+        return vf;
+    }
+
+    public double getVi() {
+        return vi;
     }
 
     public void solveT(){
@@ -102,5 +127,18 @@ public class Equations {
         if(!isT){
             solveT();
         }
+    }
+
+    public void refresh(){
+        t = 0;
+        d = 0;
+        vi = 0;
+        vf = 0;
+        a = 0;
+        isA = false;
+        isD = false;
+        isT = false;
+        isVf = false;
+        isVi = false;
     }
 }
