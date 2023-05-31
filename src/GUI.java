@@ -10,6 +10,8 @@ public class GUI extends JFrame{
     private JButton solveButton;
     private JPanel label;
     private JLabel info;
+    private JTabbedPane tabbedPane1;
+    private JPanel CM;
 
     public GUI() {
         createComponents();
@@ -59,5 +61,4 @@ public class GUI extends JFrame{
             equ.refresh();
         });
     }
-
 }

@@ -4,14 +4,20 @@ public class Equations {
     private double vi;
     private double vf;
     private double a;
+    private double m;
+    private double p;
+    private double n;
 
-    private boolean isT,isD,isVi,isVf,isA;
+    private boolean isT,isD,isVi,isVf,isA,isM,isP,isN;
     public Equations(){
         isT=false;
         isD=false;
         isVi=false;
         isVf=false;
         isA=false;
+        isM=false;
+        isP=false;
+        isN=false;
     }
 
     public void setT(double t) {
@@ -34,25 +40,42 @@ public class Equations {
         this.a = a;
         isA = true;
     }
+    public void setM(double m) {
+        this.m = m;
+        isM = true;
+    }
+    public void setP(double p) {
+        this.p = p;
+        isP = true;
+    }
+    public void setN(double n) {
+        this.n = n;
+        isN = true;
+    }
 
     public double getT(){
         return t;
     }
-
     public double getD(){
         return d;
     }
-
     public double getA() {
         return a;
     }
-
     public double getVf() {
         return vf;
     }
-
     public double getVi() {
         return vi;
+    }
+    public double getM() {
+        return m;
+    }
+    public double getP() {
+        return p;
+    }
+    public double getN() {
+        return n;
     }
 
     public void solveT(){
@@ -135,10 +158,16 @@ public class Equations {
         vi = 0;
         vf = 0;
         a = 0;
+        m = 0;
+        p = 0;
+        n = 0;
         isA = false;
         isD = false;
         isT = false;
         isVf = false;
         isVi = false;
+        isM = false;
+        isP = false;
+        isN = false;
     }
 }
