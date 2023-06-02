@@ -134,6 +134,19 @@ public class Equations {
         }
     }
 
+    public void solveM() {
+        if(!isN) {
+            m = p/vi;
+        } else if (!isP) {
+            m = n/a;
+        }
+    }
+
+    public void solveP(){
+         +
+        }
+    }
+
     public void solve(){
         if(!isD){
             solveD();
