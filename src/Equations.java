@@ -7,8 +7,9 @@ public class Equations {
     private double m;
     private double p;
     private double n;
+    private double r;
 
-    private boolean isT,isD,isVi,isVf,isA,isM,isP,isN;
+    private boolean isT,isD,isVi,isVf,isA,isM,isP,isN,isR;
     public Equations(){
         isT=false;
         isD=false;
@@ -18,6 +19,7 @@ public class Equations {
         isM=false;
         isP=false;
         isN=false;
+        isR=false;
     }
 
     public void setT(double t) {
@@ -53,6 +55,11 @@ public class Equations {
         isN = true;
     }
 
+    public void setR(double r) {
+        this.r = r;
+        isR = true;
+    }
+
     public double getT(){
         return t;
     }
@@ -76,6 +83,9 @@ public class Equations {
     }
     public double getN() {
         return n;
+    }
+    public double getR() {
+        return r;
     }
 
     public void solveT(){
@@ -143,9 +153,9 @@ public class Equations {
     }
 
     public void solveP(){
-         +
+
         }
-    }
+
 
     public void solve(){
         if(!isD){

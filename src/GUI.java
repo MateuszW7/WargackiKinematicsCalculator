@@ -12,6 +12,10 @@ public class GUI extends JFrame{
     private JLabel info;
     private JTabbedPane tabbedPane1;
     private JPanel CM;
+    private JTextField textField1;
+    private JTextField textField2;
+    private JTextField textField3;
+    private JTextField textField4;
 
     public GUI() {
         createComponents();
