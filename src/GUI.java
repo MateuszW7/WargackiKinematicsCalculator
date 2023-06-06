@@ -12,10 +12,18 @@ public class GUI extends JFrame{
     private JLabel info;
     private JTabbedPane tabbedPane1;
     private JPanel CM;
+    private JTextField massFM;
+    private JTextField velocityFM;
+    private JTextField momentumFM;
+    private JTextField forceFM;
+    private JButton solveButton2;
+    private JTextField accelerationFM;
+    private JLabel textField;
     private JTextField textField1;
     private JTextField textField2;
     private JTextField textField3;
     private JTextField textField4;
+    private JTextField textField5;
 
     public GUI() {
         createComponents();
@@ -63,6 +71,10 @@ public class GUI extends JFrame{
                 acceleration.setText(String.valueOf(equ.getA()) + "m/s²");
             }
             equ.refresh();
+        });
+
+        solveButton2.addActionListener(e ->{
+
         });
     }
 }

@@ -153,8 +153,20 @@ public class Equations {
     }
 
     public void solveP(){
+        p = m * vi;
+    }
 
-        }
+    public void solveN(){
+        n = m * a;
+    }
+
+    public void solveAFM(){
+        a = n/m;
+    }
+
+    public void solveVFM(){
+        vi = p/m;
+    }
 
 
     public void solve(){
