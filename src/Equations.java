@@ -54,7 +54,6 @@ public class Equations {
         this.n = n;
         isN = true;
     }
-
     public void setR(double r) {
         this.r = r;
         isR = true;
@@ -91,83 +90,120 @@ public class Equations {
     public void solveT(){
         if(!isD){
             t = (vf-vi)/a;
+            isT = true;
         } else {
             t = d/(0.5*(vf+vi));
+            isT = true;
         }
     }
-
     public void solveD(){
         if(!isVf){
             d = vi*t + (0.5 * a * Math.pow(t,2));
+            isD = true;
         } else if (!isVi) {
             d = vf*t - (0.5 * a * Math.pow(t,2));
+            isD = true;
         } else if (!isT) {
             d = (Math.pow(vf,2) - Math.pow(vi,2))/(2*a);
+            isD = true;
         } else {
             d = 0.5 * (vf + vi) * t;
+            isD = true;
         }
     }
-
     public void solveVi(){
         if(!isD){
             vi = vf - a * t;
+            isVi = true;
         } else if (!isA) {
             vi = 2.0*d/t - vf;
+            isVi = true;
         } else if (!isT){
             vi = Math.sqrt(Math.pow(vf,2)-2*a*d);
+            isVi = true;
         } else {
             vi = (d-0.5*a*Math.pow(t,2))/t;
+            isVi = true;
         }
     }
-
     public void solveVf(){
         if(!isD){
             vf = vi + a * t;
+            isVf = true;
         } else if (!isA) {
             vf = 2.0*d/t - vi;
+            isVf = true;
         } else if (!isT){
             vf = Math.sqrt(Math.pow(vf,2)+2*a*d);
+            isVf = true;
         } else{
             vf = (d+0.5*a*Math.pow(t,2))/t;
+            isVf = true;
         }
     }
-
     public void solveA() {
         if (!isT) {
             a = (Math.pow(vf, 2) - Math.pow(vi, 2)) / (2.0 * d);
+            isA = true;
         } else if (!isVi) {
             a = (d - vf * t) / (-0.5 * Math.pow(t, 2));
+            isA = true;
         } else if (!isVf) {
             a = (d - vf * t) / (0.5 * Math.pow(t, 2));
+            isA = true;
         } else {
             a = (vf - vi) / t;
+            isA = true;
         }
     }
-
-    public void solveM() {
-        if(!isN) {
+    public boolean solveM() {
+        if(!isN && isP) {
             m = p/vi;
-        } else if (!isP) {
+            isM = true;
+            return true;
+        } else if (!isP && isN) {
             m = n/a;
+            isM = true;
+            return true;
+        }
+        return false;
+    }
+    public void solveP() {
+        if (isVi) {
+            p = m * vi;
+            isP = true;
         }
     }
-
-    public void solveP(){
-        p = m * vi;
-    }
-
     public void solveN(){
-        n = m * a;
+        if(isA) {
+            n = m * a;
+            isN = true;
+        }
     }
-
     public void solveAFM(){
-        a = n/m;
+        if(isN) {
+            a = n / m;
+            isA = true;
+        }
     }
-
     public void solveVFM(){
-        vi = p/m;
+        if(isP) {
+            vi = p / m;
+            isVi = true;
+        }
     }
-
+    public void solveR(){
+        r = Math.pow(vi,2)/a;
+        isR = true;
+    }
+    public void solveAC(){
+        a = Math.pow(vi,2)/r;
+        isA = true;
+    }
+    public void solveVC(){
+        vi = Math.sqrt(a * r);
+        isVi = true;
+    }
 
     public void solve(){
         if(!isD){
@@ -186,7 +222,67 @@ public class Equations {
             solveT();
         }
     }
-
+    public boolean solveFM(){
+        if(!isM){
+            if(!solveM()){
+                return false;
+            }
+        }
+        if(!isP){
+            solveP();
+        }
+        if(!isVi){
+            solveVFM();
+        }
+        if(!isN){
+            solveN();
+        }
+        if(!isA){
+            solveAFM();
+        }
+        return true;
+    }
+    public boolean solveCM(){
+        if(isN && isM){
+            solveAFM();
+        }
+        if(isR || isVi){
+            int counter = 0;
+            if(isR && isA){
+                solveVC();
+                counter++;
+            }
+            if(isVi && isR){
+                solveAC();
+                counter++;
+            }
+            if(isVi && isA){
+                solveR();
+                counter++;
+            }
+            if (counter == 0) {
+                return false;
+            } else if (isN) {
+                solveM();
+            } else if (isM) {
+                solveN();
+            }
+            return true;
+        }else{
+            if(isA){
+                if(isN){
+                    solveM();
+                } else if (isM) {
+                    solveN();
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }
+        return true;
+    }
     public void refresh(){
         t = 0;
         d = 0;
@@ -196,6 +292,7 @@ public class Equations {
         m = 0;
         p = 0;
         n = 0;
+        r = 0;
         isA = false;
         isD = false;
         isT = false;
@@ -204,5 +301,6 @@ public class Equations {
         isM = false;
         isP = false;
         isN = false;
+        isR = false;
     }
 }
